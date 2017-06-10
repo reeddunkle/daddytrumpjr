@@ -1,1 +1,3 @@
-config.js
+.env
+.git/
+node_modules/
