@@ -30,13 +30,13 @@ var config = {
 
 var users = {
   dtJR: 39344374,
-  deer: 62298196
+  test: 62298196
 };
 
 var client = new _twitter2.default(config);
 var path = 'statuses/filter';
 var params = {
-  follow: users.deer
+  follow: users.dtJR
 };
 
 function postTweet(status) {
