@@ -5,6 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = run;
 
+var _express = require('express');
+
+var _express2 = _interopRequireDefault(_express);
+
 var _flow = require('lodash/fp/flow');
 
 var _flow2 = _interopRequireDefault(_flow);
@@ -19,7 +23,16 @@ var _twitter2 = _interopRequireDefault(_twitter);
 
 var _tweetUtil = require('../tweetUtil');
 
+var _util = require('./util');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// HEROKU SETUP
+var app = (0, _express2.default)();
+app.get('/', function (req, res) {
+  res.send('The robot is happily running.');
+});
+app.listen(process.env.PORT || 5000);
 
 var config = {
   consumer_key: process.env.BOT_CONSUMER_KEY,
@@ -28,7 +41,7 @@ var config = {
   access_token_secret: process.env.BOT_ACCESS_TOKEN_SECRET
 };
 
-var users = {
+var USERS = {
   dtJR: 39344374,
   test: 62298196
 };
@@ -36,11 +49,11 @@ var users = {
 var client = new _twitter2.default(config);
 var path = 'statuses/filter';
 var params = {
-  follow: users.test
+  follow: USERS.dtJR
 };
 
 function postTweet(status) {
-  client.post('statuses/update', { status: status }, _noop2.default);
+  client.post('statuses/update', { status: status }, _util.onTweetPosted);
 }
 
 function seekApproval(tweet) {

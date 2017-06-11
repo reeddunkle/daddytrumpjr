@@ -11,7 +11,12 @@
     "build": "npm run clean && npm run build-server",
     "start": "nf start"
   },
-  "keywords": [],
+  "keywords": [
+    "botacademy",
+    "bot",
+    "twitter",
+    "trump"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
