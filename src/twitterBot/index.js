@@ -18,7 +18,7 @@ const users = {
 const client = new Twitter(config);
 const path = 'statuses/filter';
 const params = {
-  follow: users.dtJR,
+  follow: users.test,
 };
 
 function postTweet(status) {
