@@ -1,7 +1,7 @@
 import flow from 'lodash/fp/flow';
 import noop from 'lodash/noop';
 import Twitter from 'twitter';
-import { addApproval, cropText, isAuthor } from '../tweetUtil';
+import { addApproval, cropText, decodeHTML, isAuthor } from '../tweetUtil';
 
 const config = {
   consumer_key: process.env.BOT_CONSUMER_KEY,
@@ -18,7 +18,7 @@ const users = {
 const client = new Twitter(config);
 const path = 'statuses/filter';
 const params = {
-  follow: users.dtJR,
+  follow: users.test,
 };
 
 function postTweet(status) {
@@ -27,6 +27,7 @@ function postTweet(status) {
 
 function seekApproval(tweet) {
   return flow(
+    decodeHTML,
     cropText,
     addApproval,
     postTweet,

@@ -36,7 +36,7 @@ var users = {
 var client = new _twitter2.default(config);
 var path = 'statuses/filter';
 var params = {
-  follow: users.dtJR
+  follow: users.test
 };
 
 function postTweet(status) {
@@ -44,7 +44,7 @@ function postTweet(status) {
 }
 
 function seekApproval(tweet) {
-  return (0, _flow2.default)(_tweetUtil.cropText, _tweetUtil.addApproval, postTweet)(tweet.text);
+  return (0, _flow2.default)(_tweetUtil.decodeHTML, _tweetUtil.cropText, _tweetUtil.addApproval, postTweet)(tweet.text);
 }
 
 function run() {
