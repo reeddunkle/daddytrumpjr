@@ -36,7 +36,7 @@ var users = {
 var client = new _twitter2.default(config);
 var path = 'statuses/filter';
 var params = {
-  follow: users.test
+  follow: users.dtJR
 };
 
 function postTweet(status) {
