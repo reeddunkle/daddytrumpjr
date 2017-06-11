@@ -1,14 +1,7 @@
-import express from 'express';
 import flow from 'lodash/fp/flow';
-import noop from 'lodash/noop';
 import Twitter from 'twitter';
 import { addApproval, cropText, decodeHTML, isAuthor } from '../tweetUtil';
 import { onTweetPosted } from './util';
-
-// HEROKU SETUP
-const app = express();
-app.get('/', (req, res) => { res.send('The robot is happily running.'); });
-app.listen(process.env.PORT || 5000);
 
 const config = {
   consumer_key: process.env.BOT_CONSUMER_KEY,

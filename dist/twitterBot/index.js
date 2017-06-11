@@ -5,17 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = run;
 
-var _express = require('express');
-
-var _express2 = _interopRequireDefault(_express);
-
 var _flow = require('lodash/fp/flow');
 
 var _flow2 = _interopRequireDefault(_flow);
-
-var _noop = require('lodash/noop');
-
-var _noop2 = _interopRequireDefault(_noop);
 
 var _twitter = require('twitter');
 
@@ -26,13 +18,6 @@ var _tweetUtil = require('../tweetUtil');
 var _util = require('./util');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// HEROKU SETUP
-var app = (0, _express2.default)();
-app.get('/', function (req, res) {
-  res.send('The robot is happily running.');
-});
-app.listen(process.env.PORT || 5000);
 
 var config = {
   consumer_key: process.env.BOT_CONSUMER_KEY,
