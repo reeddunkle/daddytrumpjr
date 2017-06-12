@@ -11,6 +11,7 @@ export function cropText(str) {
   const options = {
     length: 128,  // 140 - ' Right, dad?'.length (12)
     separator: ' ',
+    omission: '...?',
   };
   return truncate(options, str);
 }

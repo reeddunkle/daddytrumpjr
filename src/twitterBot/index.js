@@ -32,13 +32,13 @@ const seekApproval = flow(
 );
 
 function onTweetReceived(tweet) {
-  console.log(tweet);
   const meetsRequirements = (
     !tweet.retweeted &&
     isAuthor(PARAMS.follow, tweet)
   );
 
   if (meetsRequirements) {
+    console.log(tweet);
     seekApproval(tweet.text);
   }
 }

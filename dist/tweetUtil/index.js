@@ -33,7 +33,8 @@ function addApproval(str) {
 function cropText(str) {
   var options = {
     length: 128, // 140 - ' Right, dad?'.length (12)
-    separator: ' '
+    separator: ' ',
+    omission: '...?'
   };
   return (0, _truncate2.default)(options, str);
 }
