@@ -9,15 +9,14 @@ const config = {
   access_token_key: process.env.BOT_ACCESS_TOKEN,
   access_token_secret: process.env.BOT_ACCESS_TOKEN_SECRET,
 };
+const client = new Twitter(config);
 
 const USERS = {
   dtJR: 39344374,
   test: 62298196,
 };
-
-const client = new Twitter(config);
-const path = 'statuses/filter';
-const params = {
+const PATH = 'statuses/filter';
+const PARAMS = {
   follow: USERS.dtJR,
 };
 
@@ -25,20 +24,27 @@ function postTweet(status) {
   client.post('statuses/update', { status }, onTweetPosted);
 }
 
-function seekApproval(tweet) {
-  return flow(
-    decodeHTML,
-    cropText,
-    addApproval,
-    postTweet,
-  )(tweet.text);
+const seekApproval = flow(
+  decodeHTML,
+  cropText,
+  addApproval,
+  postTweet,
+);
+
+function onTweetReceived(tweet) {
+  console.log(tweet);
+  const meetsRequirements = (
+    !tweet.retweeted &&
+    isAuthor(PARAMS.follow, tweet)
+  );
+
+  if (meetsRequirements) {
+    seekApproval(tweet.text);
+  }
 }
 
 export default function run() {
-  client.stream(path, params, (stream) => {
-    stream
-      .on('data', (tweet) => {
-        if (isAuthor(params.follow, tweet)) seekApproval(tweet);
-      });
+  client.stream(PATH, PARAMS, (stream) => {
+    stream.on('data', onTweetReceived);
   });
 }

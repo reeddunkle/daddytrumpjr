@@ -19,12 +19,10 @@ export function isAuthor(followId, tweet) {
   return toString(followId) === tweet.user.id_str;
 }
 
-export function decodeHTML(str) {
-  return flow(
-    replace('&amp;', '&'),
-    replace('&gt;', '>'),
-    replace('&lt;', '<'),
-    replace('&quot;', '"'),
-    replace('&#39;', "'"),
-  )(str);
-}
+export const decodeHTML = flow(
+  replace('&amp;', '&'),
+  replace('&gt;', '>'),
+  replace('&lt;', '<'),
+  replace('&quot;', '"'),
+  replace('&#39;', "'"),
+);
