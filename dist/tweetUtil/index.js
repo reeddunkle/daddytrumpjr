@@ -3,10 +3,10 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.decodeHTML = undefined;
 exports.addApproval = addApproval;
 exports.cropText = cropText;
 exports.isAuthor = isAuthor;
-exports.decodeHTML = decodeHTML;
 
 var _truncate = require('lodash/fp/truncate');
 
@@ -42,7 +42,5 @@ function isAuthor(followId, tweet) {
   return (0, _toString2.default)(followId) === tweet.user.id_str;
 }
 
-function decodeHTML(str) {
-  return (0, _flow2.default)((0, _replace2.default)('&amp;', '&'), (0, _replace2.default)('&gt;', '>'), (0, _replace2.default)('&lt;', '<'), (0, _replace2.default)('&quot;', '"'), (0, _replace2.default)('&#39;', "'"))(str);
-}
+var decodeHTML = exports.decodeHTML = (0, _flow2.default)((0, _replace2.default)('&amp;', '&'), (0, _replace2.default)('&gt;', '>'), (0, _replace2.default)('&lt;', '<'), (0, _replace2.default)('&quot;', '"'), (0, _replace2.default)('&#39;', "'"));
 //# sourceMappingURL=index.js.map

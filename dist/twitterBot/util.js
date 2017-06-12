@@ -8,7 +8,7 @@ exports.onTweetPosted = onTweetPosted;
 
 function onTweetPosted(err) {
   if (err) {
-    console.error('tweeting failed :(');
+    console.error('tweet failed.');
     console.error(err);
   }
 }

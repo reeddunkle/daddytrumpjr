@@ -25,15 +25,14 @@ var config = {
   access_token_key: process.env.BOT_ACCESS_TOKEN,
   access_token_secret: process.env.BOT_ACCESS_TOKEN_SECRET
 };
+var client = new _twitter2.default(config);
 
 var USERS = {
   dtJR: 39344374,
   test: 62298196
 };
-
-var client = new _twitter2.default(config);
-var path = 'statuses/filter';
-var params = {
+var PATH = 'statuses/filter';
+var PARAMS = {
   follow: USERS.dtJR
 };
 
@@ -41,15 +40,20 @@ function postTweet(status) {
   client.post('statuses/update', { status: status }, _util.onTweetPosted);
 }
 
-function seekApproval(tweet) {
-  return (0, _flow2.default)(_tweetUtil.decodeHTML, _tweetUtil.cropText, _tweetUtil.addApproval, postTweet)(tweet.text);
+var seekApproval = (0, _flow2.default)(_tweetUtil.decodeHTML, _tweetUtil.cropText, _tweetUtil.addApproval, postTweet);
+
+function onTweetReceived(tweet) {
+  console.log(tweet);
+  var meetsRequirements = !tweet.retweeted && (0, _tweetUtil.isAuthor)(PARAMS.follow, tweet);
+
+  if (meetsRequirements) {
+    seekApproval(tweet.text);
+  }
 }
 
 function run() {
-  client.stream(path, params, function (stream) {
-    stream.on('data', function (tweet) {
-      if ((0, _tweetUtil.isAuthor)(params.follow, tweet)) seekApproval(tweet);
-    });
+  client.stream(PATH, PARAMS, function (stream) {
+    stream.on('data', onTweetReceived);
   });
 }
 //# sourceMappingURL=index.js.map
