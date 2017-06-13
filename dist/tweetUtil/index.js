@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.buildApprovalText = exports.stripEscapeChars = undefined;
 exports.addApproval = addApproval;
-exports.cropText = cropText;
+exports.truncateText = truncateText;
 exports.isAuthor = isAuthor;
 exports.getTweetText = getTweetText;
 
@@ -35,7 +35,7 @@ function addApproval(str) {
   return str + ' Right, dad?';
 }
 
-function cropText(str) {
+function truncateText(str) {
   var options = {
     length: 128, // 140 - ' Right, dad?'.length (12)
     separator: ' ',
@@ -56,5 +56,5 @@ function getTweetText(tweet) {
 var stripEscapeChars = exports.stripEscapeChars = (0, _flow2.default)((0, _replace2.default)('\'', "'"), (0, _replace2.default)("\"", '"'));
 /* eslint-enable */
 
-var buildApprovalText = exports.buildApprovalText = (0, _flow2.default)(_unescape3.default, stripEscapeChars, cropText, addApproval);
+var buildApprovalText = exports.buildApprovalText = (0, _flow2.default)(_unescape3.default, stripEscapeChars, truncateText, addApproval);
 //# sourceMappingURL=index.js.map

@@ -12,12 +12,12 @@ const config = {
 const client = new Twitter(config);
 
 const USERS = {
-  dtJR: 39344374,
+  dtJr: 39344374,
   test: 62298196,
 };
 const PATH = 'statuses/filter';
 const PARAMS = {
-  follow: USERS.dtJR,
+  follow: USERS.dtJr,
 };
 
 function postTweet(params) {

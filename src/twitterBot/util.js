@@ -9,6 +9,6 @@ export function onTweetPosted(err) {
 
 export function buildPostParams(tweet, status) {
   const params = { status };
-  if (tweet.quoted_status) params.in_reply_to_status_id = tweet.quoted_status_id;
+  if (tweet.quoted_status) params.in_reply_to_status_id_str = tweet.quoted_status_id_str;
   return params;
 }
