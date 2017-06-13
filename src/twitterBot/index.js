@@ -1,6 +1,6 @@
 import flow from 'lodash/fp/flow';
 import Twitter from 'twitter';
-import { buildApprovalText, isAuthor } from '../tweetUtil';
+import { buildApprovalText, getTweetText, isAuthor } from '../tweetUtil';
 import { buildPostParams, onTweetPosted } from './util';
 
 const config = {
@@ -32,6 +32,7 @@ function seekApproval(tweet) {
 
   if (meetsRequirements) {
     flow(
+      getTweetText,
       buildApprovalText,
       buildPostParams(tweet),
       postTweet,
