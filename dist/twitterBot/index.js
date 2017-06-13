@@ -33,7 +33,7 @@ var USERS = {
 };
 var PATH = 'statuses/filter';
 var PARAMS = {
-  follow: USERS.dtJr
+  follow: USERS.test
 };
 
 function postTweet(params) {
