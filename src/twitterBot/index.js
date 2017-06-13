@@ -31,6 +31,7 @@ function seekApproval(tweet) {
   );
 
   if (meetsRequirements) {
+    console.log(tweet);
     flow(
       getTweetText,
       buildApprovalText,
