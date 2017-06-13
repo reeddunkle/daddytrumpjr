@@ -16,7 +16,7 @@ function onTweetPosted(err) {
 
 function buildPostParams(tweet, status) {
   var params = { status: status };
-  if (tweet.quoted_status) params.in_reply_to_status_id = tweet.quoted_status_id;
+  if (tweet.quoted_status) params.in_reply_to_status_id_str = tweet.quoted_status_id_str;
   return params;
 }
 //# sourceMappingURL=util.js.map

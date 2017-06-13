@@ -28,12 +28,12 @@ var config = {
 var client = new _twitter2.default(config);
 
 var USERS = {
-  dtJR: 39344374,
+  dtJr: 39344374,
   test: 62298196
 };
 var PATH = 'statuses/filter';
 var PARAMS = {
-  follow: USERS.dtJR
+  follow: USERS.dtJr
 };
 
 function postTweet(params) {

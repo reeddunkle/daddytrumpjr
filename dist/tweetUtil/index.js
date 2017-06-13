@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.buildApprovalText = exports.stripEscapeChars = undefined;
+exports.buildApprovalText = undefined;
 exports.addApproval = addApproval;
 exports.truncateText = truncateText;
 exports.isAuthor = isAuthor;
@@ -12,10 +12,6 @@ exports.getTweetText = getTweetText;
 var _flow = require('lodash/fp/flow');
 
 var _flow2 = _interopRequireDefault(_flow);
-
-var _replace = require('lodash/fp/replace');
-
-var _replace2 = _interopRequireDefault(_replace);
 
 var _truncate = require('lodash/fp/truncate');
 
@@ -52,9 +48,5 @@ function getTweetText(tweet) {
   return tweet.truncated ? tweet.extended_tweet.full_text : tweet.text;
 }
 
-/* eslint-disable quotes */
-var stripEscapeChars = exports.stripEscapeChars = (0, _flow2.default)((0, _replace2.default)('\'', "'"), (0, _replace2.default)("\"", '"'));
-/* eslint-enable */
-
-var buildApprovalText = exports.buildApprovalText = (0, _flow2.default)(_unescape3.default, stripEscapeChars, truncateText, addApproval);
+var buildApprovalText = exports.buildApprovalText = (0, _flow2.default)(_unescape3.default, truncateText, addApproval);
 //# sourceMappingURL=index.js.map
