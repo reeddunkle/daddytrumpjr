@@ -45,7 +45,7 @@ function isAuthor(followId, tweet) {
 }
 
 function getTweetText(tweet) {
-  return tweet.truncated ? tweet.extended_tweet.full_text : tweet.text;
+  return tweet.extended_tweet ? tweet.extended_tweet.full_text : tweet.text;
 }
 
 var buildApprovalText = exports.buildApprovalText = (0, _flow2.default)(_unescape3.default, truncateText, addApproval);
