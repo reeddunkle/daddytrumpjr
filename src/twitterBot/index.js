@@ -1,6 +1,6 @@
 import flow from 'lodash/fp/flow';
 import Twitter from 'twitter';
-import { buildApprovalText, getTweetText, isAuthor } from '../tweetUtil';
+import { buildApprovalText, getTweetText, isAuthor, log } from '../tweetUtil';
 import { buildPostParams, onTweetPosted } from './util';
 
 const config = {
@@ -17,7 +17,7 @@ const USERS = {
 };
 const PATH = 'statuses/filter';
 const PARAMS = {
-  follow: USERS.test,
+  follow: USERS.dtJr,
 };
 
 function postTweet(params) {

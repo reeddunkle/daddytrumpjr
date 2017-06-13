@@ -1,3 +1,4 @@
+import curry from 'lodash/fp/curry';
 import flow from 'lodash/fp/flow';
 import truncate from 'lodash/fp/truncate';
 import _unescape from 'lodash/fp/unescape';
@@ -20,8 +21,17 @@ export function isAuthor(followId, tweet) {
   return toString(followId) === tweet.user.id_str;
 }
 
+export const log = curry((f, arg) => {
+  console.log(`
+    Ran ${f}
+    ...Received: ${arg}
+  `);
+  return arg;
+});
+
 export function getTweetText(tweet) {
-  return (tweet.extended_tweet ? tweet.extended_tweet.full_text : tweet.text);
+  const output = (tweet.extended_tweet ? tweet.extended_tweet.full_text : tweet.text);
+  return output;
 }
 
 export const buildApprovalText = flow(

@@ -3,11 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.buildApprovalText = undefined;
+exports.buildApprovalText = exports.log = undefined;
 exports.addApproval = addApproval;
 exports.truncateText = truncateText;
 exports.isAuthor = isAuthor;
 exports.getTweetText = getTweetText;
+
+var _curry = require('lodash/fp/curry');
+
+var _curry2 = _interopRequireDefault(_curry);
 
 var _flow = require('lodash/fp/flow');
 
@@ -44,8 +48,14 @@ function isAuthor(followId, tweet) {
   return (0, _toString2.default)(followId) === tweet.user.id_str;
 }
 
+var log = exports.log = (0, _curry2.default)(function (f, arg) {
+  console.log('\n    Ran ' + f + '\n    ...Received: ' + arg + '\n  ');
+  return arg;
+});
+
 function getTweetText(tweet) {
-  return tweet.extended_tweet ? tweet.extended_tweet.full_text : tweet.text;
+  var output = tweet.extended_tweet ? tweet.extended_tweet.full_text : tweet.text;
+  return output;
 }
 
 var buildApprovalText = exports.buildApprovalText = (0, _flow2.default)(_unescape3.default, truncateText, addApproval);
