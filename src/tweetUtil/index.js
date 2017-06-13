@@ -21,7 +21,7 @@ export function isAuthor(followId, tweet) {
 }
 
 export function getTweetText(tweet) {
-  return (tweet.truncated ? tweet.extended_tweet.full_text : tweet.text);
+  return (tweet.extended_tweet ? tweet.extended_tweet.full_text : tweet.text);
 }
 
 export const buildApprovalText = flow(
