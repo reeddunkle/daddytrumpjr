@@ -36,24 +36,21 @@ var PARAMS = {
   follow: USERS.dtJR
 };
 
-function postTweet(status) {
-  client.post('statuses/update', { status: status }, _util.onTweetPosted);
+function postTweet(params) {
+  client.post('statuses/update', params, _util.onTweetPosted);
 }
 
-var seekApproval = (0, _flow2.default)(_tweetUtil.decodeHTML, _tweetUtil.cropText, _tweetUtil.addApproval, postTweet);
-
-function onTweetReceived(tweet) {
+function seekApproval(tweet) {
   var meetsRequirements = !tweet.retweeted && (0, _tweetUtil.isAuthor)(PARAMS.follow, tweet);
 
   if (meetsRequirements) {
-    console.log(tweet);
-    seekApproval(tweet.text);
+    (0, _flow2.default)(_tweetUtil.buildApprovalText, (0, _util.buildPostParams)(tweet), postTweet)(tweet);
   }
 }
 
 function run() {
   client.stream(PATH, PARAMS, function (stream) {
-    stream.on('data', onTweetReceived);
+    stream.on('data', seekApproval);
   });
 }
 //# sourceMappingURL=index.js.map
