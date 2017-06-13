@@ -1,7 +1,7 @@
 import flow from 'lodash/fp/flow';
 import Twitter from 'twitter';
-import { addApproval, cropText, decodeHTML, isAuthor } from '../tweetUtil';
-import { onTweetPosted } from './util';
+import { buildApprovalText, isAuthor } from '../tweetUtil';
+import { buildPostParams, onTweetPosted } from './util';
 
 const config = {
   consumer_key: process.env.BOT_CONSUMER_KEY,
@@ -20,31 +20,27 @@ const PARAMS = {
   follow: USERS.dtJR,
 };
 
-function postTweet(status) {
-  client.post('statuses/update', { status }, onTweetPosted);
+function postTweet(params) {
+  client.post('statuses/update', params, onTweetPosted);
 }
 
-const seekApproval = flow(
-  decodeHTML,
-  cropText,
-  addApproval,
-  postTweet,
-);
-
-function onTweetReceived(tweet) {
+function seekApproval(tweet) {
   const meetsRequirements = (
     !tweet.retweeted &&
     isAuthor(PARAMS.follow, tweet)
   );
 
   if (meetsRequirements) {
-    console.log(tweet);
-    seekApproval(tweet.text);
+    flow(
+      buildApprovalText,
+      buildPostParams(tweet),
+      postTweet,
+    )(tweet);
   }
 }
 
 export default function run() {
   client.stream(PATH, PARAMS, (stream) => {
-    stream.on('data', onTweetReceived);
+    stream.on('data', seekApproval);
   });
 }

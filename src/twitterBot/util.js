@@ -6,3 +6,9 @@ export function onTweetPosted(err) {
     console.error(err);
   }
 }
+
+export function buildPostParams(tweet, status) {
+  const params = { status };
+  if (tweet.quoted_status) params.in_reply_to_status_id = tweet.quoted_status_id;
+  return params;
+}
