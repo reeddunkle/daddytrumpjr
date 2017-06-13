@@ -44,7 +44,7 @@ function seekApproval(tweet) {
   var meetsRequirements = !tweet.retweeted && (0, _tweetUtil.isAuthor)(PARAMS.follow, tweet);
 
   if (meetsRequirements) {
-    (0, _flow2.default)(_tweetUtil.buildApprovalText, (0, _util.buildPostParams)(tweet), postTweet)(tweet);
+    (0, _flow2.default)(_tweetUtil.getTweetText, _tweetUtil.buildApprovalText, (0, _util.buildPostParams)(tweet), postTweet)(tweet);
   }
 }
 
