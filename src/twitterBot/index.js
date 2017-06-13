@@ -26,7 +26,7 @@ function postTweet(params) {
 
 function seekApproval(tweet) {
   const meetsRequirements = (
-    !tweet.retweeted &&
+    !tweet.retweeted_status &&
     isAuthor(PARAMS.follow, tweet)
   );
 
