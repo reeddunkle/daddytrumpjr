@@ -4,15 +4,19 @@ import truncate from 'lodash/fp/truncate';
 import _unescape from 'lodash/fp/unescape';
 import toString from 'lodash/toString';
 
+const TWEET_LENGTH = 240;
+const APPROVAL_TEXT = 'Right, dad?';
+
 export function addApproval(str) {
-  return `${str} Right, dad?`;
+  return `${str} ${APPROVAL_TEXT}`;
 }
 
 export function truncateText(str) {
+  const charsNeeded = APPROVAL_TEXT.length + 1; // One space
   const options = {
-    length: 128,  // 140 - ' Right, dad?'.length (12)
+    length: TWEET_LENGTH - charsNeeded,
     separator: ' ',
-    omission: '...?',
+    omission: '...',
   };
   return truncate(options, str);
 }
@@ -30,8 +34,7 @@ export const log = curry((f, arg) => {
 });
 
 export function getTweetText(tweet) {
-  const output = (tweet.extended_tweet ? tweet.extended_tweet.full_text : tweet.text);
-  return output;
+  return tweet.extended_tweet ? tweet.extended_tweet.full_text : tweet.text;
 }
 
 export const buildApprovalText = flow(
